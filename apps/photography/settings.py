@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpack_loader',
     'display',
 ]
 
@@ -119,3 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# User uploaded files "Media"
+MEDIA_URL = '/media/'
+# Place the media root alongside the git directory. Outside the 'git clean'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../../photography-display-media')
+
