@@ -1,7 +1,12 @@
 <template>
   <div class="d-flex flex-column app-container flex-fill">
-    Photo
-    <img :src="photoUrl" alt="Smiley face">
+    <div @click="getNextPhoto()">
+      Next
+    </div>
+    <div @click="getPreviousPhoto()">
+      Previous
+    </div>
+    <img :src="photoUrl" alt="Chosen photo">
   </div>
 </template>
 <script>
@@ -14,31 +19,44 @@ export default {
   name: 'App',
   data() {
     return {
-      photoId: null,
+      photoIndex: null,
       photoUrl: null,
+      photos: [],
     };
   },
   created() {
-    console.log('Fetch photo');
-    // this.photoId: this.$route.params.photoId;
-    if (this.photoId === null) {
-      console.log('set id');
-      this.getInitialId();
-      this.getPhoto();
-    }
+    this.getPhotos();
   },
   methods: {
-    getInitialId() {
-      this.photoId = 1;
+    setPhoto() {
+      this.photoUrl = this.photos[this.photoIndex].image;
     },
-    getPhoto() {
-      const url = `/api/photos/${this.photoId}`;
+    getPhotos() {
+      const url = '/api/photos';
       axios.get(url)
         .then((x) => {
-          this.photoUrl = x.data.image;
-          console.log(this.photoUrl);
-        })
-        .catch(() => {});
+          this.photos = x.data;
+          this.photoIndex = 0;
+          this.setPhoto();
+        });
+    },
+    getNextPhoto() {
+      if (this.photoIndex === this.photos.length - 1) {
+        this.photoIndex = this.photos.length - 1;
+        this.setPhoto();
+      } else {
+        this.photoIndex += 1;
+        this.setPhoto();
+      }
+    },
+    getPreviousPhoto() {
+      if (this.photoIndex === 0) {
+        this.photoIndex = 0;
+        this.setPhoto();
+      } else {
+        this.photoIndex -= 1;
+        this.setPhoto();
+      }
     },
   },
 };

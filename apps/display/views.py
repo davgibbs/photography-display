@@ -13,7 +13,7 @@ class PhotoViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows photos to be viewed
     """
-    queryset = Photo.objects.all().order_by('title')
+    queryset = Photo.objects.all().order_by('id')
     serializer_class = PhotoSerializer
 
 
