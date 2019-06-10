@@ -1,15 +1,25 @@
 <template>
-  <div class="d-flex flex-column app-container flex-fill">
-    <div @click="getNextPhoto()">
-      Next
+  <div>
+    <div class="d-flex flex-row justify-content-center">
+      <div class="previous" @click="getPreviousPhoto()">
+        Previous
+      </div>
+      <div class="photo-count">
+        {{ photoIndex + 1 }} / {{ photos.length }}
+      </div>
+      <div class="next" @click="getNextPhoto()">
+        Next
+      </div>
     </div>
-    <div @click="getPreviousPhoto()">
-      Previous
+    <div class="d-flex flex-row justify-content-center">
+      <div class="image-wrapper">
+        <img :src="photoUrl" alt="Chosen photo" class="center-fit">
+      </div>
     </div>
-    <img :src="photoUrl" alt="Chosen photo">
   </div>
 </template>
 <script>
+require('bootstrap/dist/css/bootstrap.min.css');
 const axios = require('axios');
 
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -62,5 +72,35 @@ export default {
 };
 </script>
 <style>
+body {
+  background-color:black;
+}
 
+.next {
+  margin-left: 20px;
+  color: white;
+  cursor: pointer;
+  padding: 0 10 0 10;
+}
+
+.previous {
+  margin-right: 20px;
+  color: white;
+  cursor: pointer;
+  padding: 0 10 0 10;
+}
+
+.photo-count {
+  color: white;
+}
+
+.image-wrapper {
+  display: grid;
+}
+
+.center-fit {
+  max-width: 95%;
+  max-height: 95vh;
+  margin: auto;
+}
 </style>
