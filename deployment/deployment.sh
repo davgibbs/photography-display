@@ -33,7 +33,7 @@ git reset --hard origin/master
 echo "----------------------------------------------------------"
 echo "Clean the directory except for the Python env and Node env"
 echo "----------------------------------------------------------"
-sudo git clean -d -x -f -e py36/ -e node_modules/
+git clean -d -x -f -e py36/ -e node_modules/
 
 echo "------------------"
 echo "Upgrade Python env"
@@ -48,12 +48,12 @@ npm run build
 echo "---------------------------------------"
 echo "Collect all the static files for Django"
 echo "---------------------------------------"
-sudo py36/bin/python apps/manage.py collectstatic --noinput --clear --settings=geodirectory.$SETTINGS_FILE
+py36/bin/python apps/manage.py collectstatic --noinput --clear --settings=geodirectory.$SETTINGS_FILE
 
 echo "-------------------------------------"
 echo "Run any migrations that are available"
 echo "-------------------------------------"
-sudo py36/bin/python apps/manage.py migrate --settings=geodirectory.$SETTINGS_FILE
+py36/bin/python apps/manage.py migrate --settings=geodirectory.$SETTINGS_FILE
 
 
 
