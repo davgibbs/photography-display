@@ -126,4 +126,3 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 # Place the media root alongside the git directory. Outside the 'git clean'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../../photography-display-media')
-

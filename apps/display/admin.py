@@ -8,4 +8,3 @@ class PhotoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Photo, PhotoAdmin)
-

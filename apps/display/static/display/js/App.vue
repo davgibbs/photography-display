@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="d-flex flex-row justify-content-center">
-      <div class="previous" @click="getPreviousPhoto()">
+      <div class="previous color-white" @click="getPreviousPhoto()">
         Previous
       </div>
-      <div class="photo-count">
+      <div class="color-white">
         {{ photoIndex + 1 }} / {{ photos.length }}
       </div>
-      <div class="next" @click="getNextPhoto()">
+      <div class="next color-white" @click="getNextPhoto()">
         Next
       </div>
     </div>
@@ -20,16 +20,14 @@
 </template>
 <script>
 require('bootstrap/dist/css/bootstrap.min.css');
-const axios = require('axios');
 
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.xsrfCookieName = 'csrftoken';
+const axios = require('axios');
 
 export default {
   name: 'App',
   data() {
     return {
-      photoIndex: null,
+      photoIndex: 0,
       photoUrl: null,
       photos: [],
     };
@@ -46,24 +44,17 @@ export default {
       axios.get(url)
         .then((x) => {
           this.photos = x.data;
-          this.photoIndex = 0;
           this.setPhoto();
         });
     },
     getNextPhoto() {
-      if (this.photoIndex === this.photos.length - 1) {
-        this.photoIndex = this.photos.length - 1;
-        this.setPhoto();
-      } else {
+      if (this.photoIndex !== this.photos.length - 1) {
         this.photoIndex += 1;
         this.setPhoto();
       }
     },
     getPreviousPhoto() {
-      if (this.photoIndex === 0) {
-        this.photoIndex = 0;
-        this.setPhoto();
-      } else {
+      if (this.photoIndex !== 0) {
         this.photoIndex -= 1;
         this.setPhoto();
       }
@@ -78,19 +69,17 @@ body {
 
 .next {
   margin-left: 20px;
-  color: white;
   cursor: pointer;
   padding: 0 10 0 10;
 }
 
 .previous {
   margin-right: 20px;
-  color: white;
   cursor: pointer;
   padding: 0 10 0 10;
 }
 
-.photo-count {
+.color-white {
   color: white;
 }
 
