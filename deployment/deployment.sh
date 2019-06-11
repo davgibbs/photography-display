@@ -48,12 +48,12 @@ npm run build
 echo "---------------------------------------"
 echo "Collect all the static files for Django"
 echo "---------------------------------------"
-py36/bin/python apps/manage.py collectstatic --noinput --clear --settings=geodirectory.$SETTINGS_FILE
+py36/bin/python apps/manage.py collectstatic --noinput --clear --settings=photography.$SETTINGS_FILE
 
 echo "-------------------------------------"
 echo "Run any migrations that are available"
 echo "-------------------------------------"
-py36/bin/python apps/manage.py migrate --settings=geodirectory.$SETTINGS_FILE
+py36/bin/python apps/manage.py migrate --settings=photography.$SETTINGS_FILE
 
 
 
