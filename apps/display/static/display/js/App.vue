@@ -1,26 +1,26 @@
 <template>
   <div>
     <div class="d-flex flex-row justify-content-center">
-      <div class="previous color-white" @click="getPreviousPhoto()">
+      <div class="previous color-white large-font" @click="getPreviousPhoto()">
         Previous
       </div>
-      <div class="color-white">
+      <div class="color-white large-text">
         {{ photoIndex + 1 }} / {{ photos.length }}
       </div>
-      <div class="next color-white" @click="getNextPhoto()">
+      <div class="next color-white large-font" @click="getNextPhoto()">
         Next
       </div>
     </div>
     <div class="d-flex flex-row justify-content-center">
       <div class="image-wrapper">
-        <img :src="photoUrl" alt="Chosen photo" class="center-fit">
+        <img v-if="loadingImg" src="static/display/img/spinner-square.gif" alt="Loading Gif" class="center-fit">
+        <img v-if="!loadingImg" :src="photoUrl" alt="Chosen photo" class="center-fit">
       </div>
     </div>
   </div>
 </template>
 <script>
 require('bootstrap/dist/css/bootstrap.min.css');
-
 const axios = require('axios');
 
 export default {
@@ -30,6 +30,7 @@ export default {
       photoIndex: 0,
       photoUrl: null,
       photos: [],
+      loadingImg: true,
     };
   },
   created() {
@@ -67,16 +68,10 @@ body {
   background-color:black;
 }
 
-.next {
-  margin-left: 20px;
-  cursor: pointer;
-  padding: 0 10 0 10;
-}
-
-.previous {
-  margin-right: 20px;
-  cursor: pointer;
-  padding: 0 10 0 10;
+.center-fit {
+  max-width: 95%;
+  max-height: 95vh;
+  margin: auto;
 }
 
 .color-white {
@@ -87,9 +82,19 @@ body {
   display: grid;
 }
 
-.center-fit {
-  max-width: 95%;
-  max-height: 95vh;
-  margin: auto;
+.large-font {
+  font-size: large;
+}
+
+.next {
+  margin-left: 20px;
+  cursor: pointer;
+  padding: 0 10 0 10;
+}
+
+.previous {
+  margin-right: 20px;
+  cursor: pointer;
+  padding: 0 10 0 10;
 }
 </style>
