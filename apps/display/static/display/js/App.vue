@@ -13,8 +13,7 @@
     </div>
     <div class="d-flex flex-row justify-content-center">
       <div class="image-wrapper">
-        <img v-if="loadingImg" src="static/display/img/spinner-square.gif" alt="Loading Gif" class="center-fit">
-        <img v-if="!loadingImg" :src="photoUrl" alt="Chosen photo" class="center-fit">
+        <img :src="photoUrl" alt="Chosen photo" class="center-fit">
       </div>
     </div>
   </div>
